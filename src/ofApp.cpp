@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "std15of.h"
 
 extern "C" {
   extern void setup();
@@ -6,79 +7,57 @@ extern "C" {
   extern void keyPressed(int key);
 }
 
-
-//--------------------------------------------------------------
-ofApp::ofApp(int screen_sx, int screen_sy, int cb_sx, int cb_sy)
-  : _std15(screen_sx, screen_sy, cb_sx, cb_sy)
+ofApp::ofApp(float screenW, float screenH, int buffW, int buffH)
+  : std15_(screenW, screenH, buffW, buffH)
 {
 }
 
-//--------------------------------------------------------------
 void ofApp::setup(){
   ::setup();
 }
 
-//--------------------------------------------------------------
 void ofApp::update(){
   ::update();
 }
 
-//--------------------------------------------------------------
 void ofApp::draw(){
-  _std15.ofDraw();
+  std15_.drawScreen();
 }
 
-//--------------------------------------------------------------
 void ofApp::keyPressed(int key){
   ::keyPressed(key);
 }
 
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
 
+
+static ofApp * app = NULL;
+
+void run(float screenW, float screenH, int buffW, int buffH) {
+  ofSetupOpenGL(screenW, screenH, OF_WINDOW);
+  app = new ofApp(screenW, screenH, buffW, buffH);
+  ofRunApp(app);
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
+void locate(int x, int y) {
+  app->std15_.locate(x,y);
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
+void putc_(char c) {
+  app->std15_.putc(c);
 }
 
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
+char scr(int x ,int y) {
+  return app->std15_.scr(x,y);
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
+void scroll(int dir) {
+  app->std15_.scroll(dir);
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
+unsigned int frame() {
+  return ofGetFrameNum();
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+int rnd(int max) {
+  return floor(ofRandom(max));
 }
