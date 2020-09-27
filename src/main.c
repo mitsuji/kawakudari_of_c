@@ -23,7 +23,12 @@ void update() {
     locate(rnd(32), 23);
     putc_('*');
     scroll(DIR_UP);
-    if (scr(x, 5) != '\0') running = FALSE;
+    if (scr(x, 5) != '\0') {
+      locate(0, 23);
+      putstr("Game Over...");
+      putnum(frame());
+      running = FALSE;
+    }
   }
 }
 

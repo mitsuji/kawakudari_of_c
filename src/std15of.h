@@ -17,9 +17,12 @@ extern "C" {
   void run(float screenW, float screenH, int buffW, int buffH);
   void locate(int x, int y);
   void putc_(char c);
+  void putstr(const char * s);
+  void putnum(int n);
   char scr(int x ,int y);
   void scroll(int dir);
   unsigned int frame();
+  void pset(int x, int y);
   int rnd(int);
 
   void setup();

@@ -46,8 +46,20 @@ void putc_(char c) {
   app->std15_.putc(c);
 }
 
+void putstr(const char * s) {
+  app->std15_.putstr(std::string(s));
+}
+
+void putnum(int n) {
+  app->std15_.putnum(n);
+}
+
 char scr(int x ,int y) {
   return app->std15_.scr(x,y);
+}
+
+void pset(int x ,int y) {
+  return app->std15_.pset(x,y);
 }
 
 void scroll(int dir) {
