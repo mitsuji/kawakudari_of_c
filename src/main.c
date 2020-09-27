@@ -1,5 +1,4 @@
-#include "std15c.h"
-#include <math.h>
+#include "std15of.h"
 
 #define TRUE  1
 #define FALSE 0
@@ -17,20 +16,18 @@ void setup() {
 }
 
 void update() {
-  if(!running) return;
-  if(framenum() % 5 == 0 ) {
+  if (!running) return;
+  if (frame() % 5 == 0) {
     locate(x, 5);
     putc_('0');
-    locate(floor(random_(32)), 23);
+    locate(rnd(32), 23);
     putc_('*');
-    scroll();
-    if (scr(x, 5)!='\0') {
-      running = FALSE;
-    }
+    scroll(DIR_UP);
+    if (scr(x, 5) != '\0') running = FALSE;
   }
 }
 
 void keyPressed(int key) {
-  if (key == KEY_LEFT)  --x;
-  if (key == KEY_RIGHT) ++x;
+  if (key == KEY_LEFT)  x--;
+  if (key == KEY_RIGHT) x++;
 }
